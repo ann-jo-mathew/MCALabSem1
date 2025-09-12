@@ -1,0 +1,55 @@
+create table Products
+(Product_ID varchar2(4) primary key check(Product_ID like 'P%'),
+Product_Name varchar2(20),
+Category varchar2(20),
+Price number );
+
+create table Suppliers
+(Supplier_ID varchar2(3) primary key check(Supplier_ID like 'S%'),
+Supplier_Name varchar2(20),
+City varchar2(10));
+
+create table Supplies
+(Supply_ID varchar2(5) primary key check(Supply_ID like'SUP%'),
+Supplier_ID varchar2(3) references Suppliers(Supplier_ID),
+Product_ID varchar2(4) references Products(Product_ID),
+Quantity number );
+
+insert into products values('P001','LED TV','Electronics',25000);
+insert into products values('P002','Office Chair','Furniture',4000);
+insert into products values('P003','Mixer Grinder','Appliances',3500);
+insert into products values('P004','Laptop','Electronics',55000);
+
+
+insert into suppliers values('S01','Arya Traders','Mumbai');
+insert into suppliers values('S02','Swift Supplies','Delhi');
+insert into suppliers values('S03','SouthMart','Chennai');
+
+insert into supplies values('SUP01','S01','P001',20);
+insert into supplies values('SUP02','S01','P004',10);
+insert into supplies values('SUP03','S02','P002',70);
+insert into supplies values('SUP04','S03','P003',40);
+
+QUESTIONS
+
+1  
+select Product_Name, Category from Products;
+
+2
+update products
+set price=price+(.1*price)
+where (category='Electronics');
+
+3
+select Supplier_ID,sum(quantity) as total
+from supplies
+group by Supplier_ID
+having(count(Supplier_ID)>1);
+
+
+4
+select to_char(to_date(sysdate,'dd-mm-yyyy') - to_date('2025-08-01','yyyy-mm-dd') ) from dual;
+
+
+5
+create table Products_Backup as(select * from products);
