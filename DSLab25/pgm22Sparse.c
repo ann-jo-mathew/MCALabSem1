@@ -1,8 +1,10 @@
-/*Aim: program to read and display of a Sparse matrix
+/* Read and display of Sparse matrix
 @Ann Jo Mathew
-Date:*/
+Roll No: 12
+02/10/2025 */
+
 #include<stdio.h>
-int r,c,i,j,count=0,s[3][20];
+int r,c,i,j,count=0,s[20][3];
 void read(int a[20][20]){
 	printf("Enter row and column size of sparse matrix: ");
 	scanf("%d %d",&r,&c);
@@ -13,17 +15,27 @@ void read(int a[20][20]){
 			scanf("%d",&a[i][j]);
 		}
 	}
-	sparseArray(a);
 }
 void sparseArray(int a[20][20]){
+	int k=1;
 	for(i=0;i<r;i++){
 		for(j=0;j<c;j++){
 			if(a[i][j]!=0){
-				s[0][count]=i;
-				s[1][count]=j;
-				s[2][count]=a[i][j];
 				count++;
-
+			}
+		}
+	}
+	s[0][0]=r;
+	s[0][1]=c;
+	s[0][2]=count;
+	
+	for(i=0;i<r;i++){
+		for(j=0;j<c;j++){
+			if(a[i][j]!=0){
+			s[k][0]=i;
+			s[k][1]=j;
+			s[k][2]=a[i][j];
+			k++;
 			}
 		}
 	}
@@ -31,26 +43,35 @@ void sparseArray(int a[20][20]){
 void dispSparse(int a[20][20]){
 	int k;
 	printf("Sparse matrix array representation\n");
-	for(k=0;k<3;k++){
-		if(k==0)
+		/*if(k==0)
 			printf("Row:    ");
 		else if(k==1)
 			printf("Column: ");
 		else
 			printf("Values: ");
-		
-		for(i=0;i<count;i++){
-		printf("%d\t",s[k][i]);
+		*/
+	printf("Row\tColumn\tValues\n");
+	for(i=0;i<=count;i++){
+		for(k=0;k<3;k++){
+			printf("%d\t",s[i][k]);
 		}
 	printf("\n");
 	}
 }
 void dispMatrix(int a[20][20]){
-	printf("The matrix is: ");
+	printf("The matrix is: \n");
+	for(i=0;i<r;i++){
+		for(j=0;j<c;j++){
+			printf("%d\t",a[i][j]);
+		}
+		printf("\n");
+	}
 }
 int main(){
 	int a[20][20];
 	read(a);
+	dispMatrix(a);
+	sparseArray(a);
 	dispSparse(a);
 	return 0;
 }
