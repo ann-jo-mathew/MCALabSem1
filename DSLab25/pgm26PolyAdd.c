@@ -22,7 +22,7 @@ void disp(int a[], int n){
 }
 void sum(int a[],int b[],int n,int m){  
 	int d,i,s[30],ca,cb;
-	d=n>m?n:m;
+	d=n>m?n:m; 
 		
 	for(i=d;i>=0;i--){
 		if(i<=n)

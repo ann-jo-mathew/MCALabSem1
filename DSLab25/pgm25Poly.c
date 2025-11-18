@@ -20,6 +20,8 @@ void disp(int a[], int n){
 	for(i=n;i>=0;i--){
 		if(i==0)
 			printf("%d",a[i]);
+		else if(i==1)
+			printf("%dx +",a[i]);
 		else
 			printf("%dx^%d + ",a[i],i);
 	}

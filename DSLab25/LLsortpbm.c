@@ -80,18 +80,40 @@ void disp(){
 	printf("\n");
 }
 void sort(){
-	node *temp;
-	node *t,*l;
-	for(t=head;t!=NULL;t=t->next){
-		for(l=t->next;l!=NULL;l=l->next){
-			if(t->data > l->data){
-				temp=t->data;
-				t->data=l->data;
-				l->data=temp;
+	//printf("Swap Address\n");
+	node *i,*j,*temp,*p_i=NULL,*p_j=NULL;
+	int swapped;
+	for(i=head;i!=NULL;i=i->next){
+		p_j=i;
+		for(j=i->next;j!=NULL;j=j->next){
+			if(i->data>j->data){
+				swapped = 1;
+				if(p_i!=NULL)
+					p_i->next=j;
+				else
+					head=j;
+				p_j->next=i;
+				
+				temp=i->next;
+				i->next=j->next;
+				j->next=temp;
+				
+				temp=i;
+				i=j;
+				j=temp;
+				
 			}
+			p_j=j;	
+	
 		}
+		p_i=i;
 	}
-	disp();		//
+ 	if(swapped)
+        printf("List sorted successfully!\n");
+    else
+        printf("List was already sorted.\n");
+
+
 }
 void search(int a){
 	node *t;

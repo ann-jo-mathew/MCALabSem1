@@ -1,17 +1,17 @@
 #include<stdio.h>
-int q[3];
+int q[50],n;
 int f=-1,r=-1;
-void enqueue(int e){
-	if((r+1)%3==f)	
+void enqueue(int e){		//Function to insert a new element to the rear
+	if((r+1)%n==f)	
 		printf("Error:Queue is full");
 	else{
 		if(r==-1)		//checking if no element has been inserted yet 
 			f=0;		//f as 0 since queue is empty
-		r=(r+1)%3;		//rear updated 
+		r=(r+1)%n;		//rear updated 
 		q[r]=e;		//element inserted
 	}
 }
-void dequeue(){
+void dequeue(){		//function to delete an element from the front
 	if(f==-1)		
 		printf("Error:Queue Empty");
 	else{
@@ -19,19 +19,20 @@ void dequeue(){
 		if(f==r)		//checking if there is only one element
 			f=r=-1;		//making it empty and deleting the only elemet
 		else
-			f=(f+1)%3;		//deleting an element
+			f=(f+1)%n;		//deleting an element
 	}
 }
-void display(){
+void display(){			//Function to display all elements
 	int i;
 	if(f==-1){
 		printf("Queue Empty\n");
 
 	}
 	else{
-		for(i=f;i<=r;i=(r+1)%3){
+		for(i=f;i!=r;i=(i+1)%n){
 			printf("%d\t",q[i]);
 		}
+		printf("%d",q[i]);
 	}
 }
 int menu(){
@@ -61,11 +62,11 @@ void processQueue(){
 	}
 }
 int main(){
-	float f=1%3;
-	printf("%f",f);
-	//int front=-1,rear=-1,n;
-	//printf("Enter the limit of the queue: ");
-	//scanf("%d",&n);
+	printf("CIRCULAR QUEUE OPERATIONS\n");
+	printf("Enter the siz of queue: ");
+	scanf("%d",&n);
+	float f=1%n;
+	//printf("%f",f);
 	processQueue();
 	return 0;
 }
